@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Search Page</title>
+    <link rel="stylesheet" type="text/css" href="styles/search.css" />
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div>
+          <h1 class="header">Search Page</h1>
+        </div>
+        <div>
+          <form class="targetForm" id="labForm">
+            <label for="Search by Library Name">Name</label>
+            <input type="text" id="name" name="name" />
+            <label for ="Search by Zip Code">Zip code</label>
+            <input type="text" pattern="[0-9]{5}" title="Five digit zip code" />
+
+            <label for="Search by Branch Name">Branch</label>
+            <textarea id="branch" name="branch" rows="5" cols="33">
+            Insert branch name
+            </textarea
+            >
+            <br />
+            <button id="formBtn">Search</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script>
+      function sendForm(e) {
+        e.preventDefault(); // this prevents your page reloading on button click
+        const target = document.querySelector("#labForm");
+        const btn = document.querySelector("#formBtn");
+
+        const formToSend = new FormData(target);
+
+        fetch("/api", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(Object.fromEntries(formToSend)),
+        })
+          .then((data) => data.text()) // note: we didn't send JSON, so there's no JSON to get.
+          .then((txtresponse) => {
+            console.log(txtresponse);
+            btn.setAttribute("disabled", true);
+            const br = document.createElement("br");
+            target.append(br);
+            target.append(`${txtresponse}`);
+          });
+      }
+      
+
+      const formBtn = document.querySelector("#formBtn");
+      formBtn.addEventListener("click", sendForm);
+    </script>
+  </body>
+</html>
