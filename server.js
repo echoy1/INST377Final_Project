@@ -23,7 +23,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 function processDataForFrontEnd(req, res) {
-  const baseURL = "https://data.princegeorgescountymd.gov/Education/Libraries/7k64-tdwr"; // Enter the URL for the data you would like to retrieve here
+  const baseURL = "https://data.princegeorgescountymd.gov/resource/7k64-tdwr.json"; // Enter the URL for the data you would like to retrieve here
 
   // Your Fetch API call starts here
   // Note that at no point do you "return" anything from this function -
@@ -58,25 +58,18 @@ app
     console.log("/api post request", req.body);
     if (!req.body.name) {
       console.log(req.body);
-      res
-        .status("418")
-        .send("something went wrong, additionally i am a teapot");
+      res.status("418").send("something went wrong, additionally i am a teapot");
     } else {
       writeUser(req.body.name, dbSettings)
-        .then((result) => {
-          console.log(result);
-          res.send("your request was successful"); // simple mode
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-  }})
-  .put('/submit',(req, res) => {
-    const data = "save form data"(+req.body.name.)
-      console.log("this is supposed to be a PUT request", req.body)
-        res.send('Form Saved')
-        })
-  ;
+      .then((result) => {
+        console.log(result);
+        res.send("your request was successful"); // simple mode
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    }
+  });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
