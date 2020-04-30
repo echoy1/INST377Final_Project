@@ -38,22 +38,29 @@
         .then((data) => {
           console.log(data);
           const checkData = data.filter((f) => f.location_1);
-          const cleanedData = checkData.map((m) => ({
+          const cleanedData = data.map((m) => ({
             name: m.branch_name,
+            lat: m.location_1.latitude,
+            long: m.location_1.longitude,
+            zipCode: m.location_1.zip_code,
+            branch: m.branch_type,
           }));
-          return cleanedData;
           console.log("check cleaned", cleanedData);
-        // })
-        // .then((data) => {
-        //   return data.reduce((result, current) => {
-        //     if (!result[current.category]) {
-        //       //if it doesn't have category, set it to empty
-        //       result[current.category] = [];
-        //     }
-        //     result[current.category].push(current);
-        //     //otherwise push current category to result
-        //     return result;
-        //   }, {});
+          return cleanedData;
+        })
+        .then((data) => {
+          return data.reduce((result, current) => {
+            if (!result[current.branch_name]) {
+              //if it doesn't have category, set it to empty
+              result[current.branch_name] = [];
+            }
+            result[current.branch_name].push(current);
+            //otherwise push current category to result
+            return result;
+          }, {});
+        })
+          .then((data) => {
+          console.log("check category cleaned", data);
         });
 
          /* var myMap = L.map("mapid").setView([38.9869, -76.9426], 12);
