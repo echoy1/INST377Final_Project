@@ -116,16 +116,54 @@ h3 {
     font-weight: bold;
 }
 
+#mapid {
+  height: 180px;
+  width: 80%;
+}
+
+/*Navigation Bar*/
+.navi {
+  margin-bottom: 10px;
+  display: flex;
+  flex-flow: row wrap;
+}
+.navi nav {
+  height: 50px;
+  flex: 100%;
+  display: flex;
+}
+
+.navi nav ul {
+  padding: 0;
+  list-style-type: none;
+  flex: 2;
+  display: flex;
+}
+
+.navi nav li {
+  display: flex;
+  justify-content: center;
+  flex: 1;
+}
+
+.navi nav a,.navi nav span {
+  display: flex;
+  justify-content: center;
+  font-size: 1.3rem;
+  padding: 2px;
+  font-weight: bold;
+  height: 2rem;
+  line-height: 2;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: black;
+}
+
 @media only screen and (max-width: 1000px) {
   .wrapper {
     max-width: 960px;
     display: flex;
     justify-content: center;
-}
-
-#mapid {
-  height: 180px;
-  width: 80%;
 }
 
 }
