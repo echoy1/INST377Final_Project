@@ -3,8 +3,22 @@
   <head>
     <title>Contact</title>
     <link rel="stylesheet" type="text/css" href="/css/bulma.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   </head>
   <body>
+    <nav class="level">
+      <div class="level-left">
+        <div class="level-item">
+          <img src="/public/Books.jpg" alt="" style="height: 100px;">
+      </div>
+        <div class="level-item">
+        <h1 class="title">
+        LocalLibraries
+        </h1>
+      </div>
+      </div>
+    </nav>
+
     <div class="section is-centered">
       <div class="wrapper">
         <div class="container">
@@ -20,45 +34,61 @@
             </ul>
           </div>
 
-          <div class="field">
-            <label class="label">Name</label>
-            <div class="control">
-              <input
-                class="input is-rounded"
-                type="text"
-                placeholder="Library Name"
-              />
+          <label class="label">Name</label>
+          <div class="columns">
+            <div class="column is-half">
+              <div class="field">
+                <div class="control has-icons-left">
+                  <input
+                    class="input is-rounded"
+                    type="text"
+                    placeholder="Name"
+                  />
+                  <span class="icon is-small is-left">
+                    <i class="fas fa-user"></i>
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
           <br />
 
-          <div class="field">
-            <label class="label">ZIP Code</label>
-            <div class="control">
-              <input
-                class="input is-rounded"
-                type="text"
-                placeholder="ZIP Code"
-              />
+          <label class="label">Email</label>
+          <div class="columns">
+            <div class="column is-half">
+              <div class="field">
+              <div class="control has-icons-left">
+                <input
+                  class="input is-rounded"
+                  type="email"
+                  placeholder="Email Address"
+                />
+                <span class="icon is-small is-left">
+                  <i class="fas fa-envelope"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          </div>
+          <br />
+
+          <label class="label">Issues</label>
+          <div class="columns">
+            <div class="column is-half">
+              <div class="field">
+                <div class="control">
+                  <textarea class="textarea" placeholder="Text area"></textarea>
+                </div>
+              </div>
             </div>
           </div>
           <br />
 
-          <div class="field">
-            <label class="label">Branch Type</label>
-            <div class="control">
-              <input
-                class="input is-rounded"
-                type="text"
-                placeholder="Branch Type"
-              />
-            </div>
-          </div>
-          <br />
-
-          <div class="field is-grouped">
-            <div class="control">
-              <button class="button is-link is-rounded">Submit</button>
+          <div class="columns">
+            <div class="column">
+              <div class="control">
+                <button class="button is-link is-rounded">Submit</button>
+              </div>
             </div>
           </div>
         </div>
