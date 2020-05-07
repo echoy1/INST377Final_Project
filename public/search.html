@@ -23,8 +23,6 @@
 
     <div class="section is-centered">
     <div class="wrapper">
-      <div class="container">
-        <div class="wrapper">
           <div class="container">
             <nav class="level">
               <div class="level-left">
@@ -39,10 +37,6 @@
                   <img src="/public/Books.jpg" alt="" style="height: 80px;">
                 </div>
             </nav>
-          </div>
-        </div>
-          </div>
-        </div>
 
           <div class="tabs is-centered">
             <ul>
@@ -51,48 +45,38 @@
               <li><a href="contact.html">Contact</a></li>
             </ul>
           </div>
-          <div/div class="targetForm" id="labForm">
-          <nav class="level">
-          <div class="level-left">
+          <div class="targetForm" id="labForm">
           <div class="columns">
-            <div class="column is-one-third">
+            <div class="column is-half">
             <div class="field">
               <label class="label">Library Name</label>
-              <div class="control has-icons-left has-icons-right">
+              <div class="control has-icons-left">
                 <input class="input is-rounded" type="text" placeholder="Search by library name">
                 <span class="icon is-small is-left">
                   <i class="fas fa-user"></i>
                 </span>
-                <span class="icon is-small is-right">
-                  <i class="fas fa-check"></i>
-                </span>
               </div>
             </div>
             </div>
             </div>
-              <!-- <p class="help is-success">This username is available</p> -->
-            </div>
             
-            <div class="level-right">
+            
             <div class="columns">
-              <div class="column is-one-fifth">
+              <div class="column is-half">
             <div class="field">
               <label class="label">Zip Code</label>
-              <div class="control has-icons-left has-icons-right">
+              <div class="control has-icons-left">
                 <input class="input zip is-rounded" type="zip " placeholder="Search by zip code">
                 <span class="icon is-small is-left">
                   <i class="fas fa-envelope"></i>
                 </span>
-                <span class="icon is-small is-right">
-                  <i class="fas fa-exclamation-triangle"></i>
-                </span>
               </div>
               </div>
             </div>
             </div>
-              <!-- <p class="help is-danger">This zipcode is invalid</p> -->
-            </div>
-            
+              
+            <div class="columns">
+              <div class="column">
             <div class="select is-rounded">
               <select>
                 <option selected>Branch Type</option>
@@ -103,16 +87,24 @@
                 <option>Branch 5</option>
               </select>
             </div>
-            
+          </div>
+            </div>
+          
+          <div class="columns">
+          <div class="column">
             <div class="field is-grouped">
               <div class="control">
                 <button class="button is-link is-rounded">Search</button>
               </div>
               </div>
-            </nav>
-              
- 
+            </div>
+          </div>
+          </div> 
+    
+    <div class="columns">
+    <div class="column">
    <div class="content" id="mapid"></div>
+    
 <script>
 
   const foodInspection = [
@@ -198,6 +190,8 @@
 </div>
 </div>
 </div>
-</section>
+</div>
+</div>
+</div>
   </body>
 </html>
