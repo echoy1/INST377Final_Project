@@ -13,6 +13,7 @@
   <script
       crossorigin=""
       integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+<<<<<<< HEAD
       src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js">
   </script>
 
@@ -39,6 +40,48 @@
           <div class="control has-icons-left has-icons-right">
             <input class="input is-rounded" name = "name" placeholder="Search by library name" type="text">
             <span class="icon is-small is-left">
+=======
+      crossorigin=""
+    ></script>
+  </head>
+  <body>
+
+    <div class="section is-centered">
+    <div class="wrapper">
+          <div class="container">
+            <nav class="level">
+              <div class="level-left">
+                <div class="level-item has-text-centered">
+                <p class="subtitle">Home</p>
+                </div>
+              </div>
+            </nav>
+            <nav class="level">
+                <div class="level-item has-text-centered">
+                  <p class="title">LocalLibraries</p>
+                  <img src="/public/Books.jpg" alt="" style="height: 80px;">
+                </div>
+            </nav>
+
+          <div class="tabs is-centered">
+            <ul>
+              <li class="is-active"><a href="search.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="targetForm" id="labForm">
+          
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
+              <label class="label">Library Name</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+              <p class="control has-icons-left">
+                <input class="input is-rounded" type="text" placeholder="Search by library name">
+                <span class="icon is-small is-left">
+>>>>>>> parent of 6a5a458... updated search.html and transfered to index.html
                   <i class="fas fa-user"></i>
                 </span>
             <span class="icon is-small is-right">
@@ -82,6 +125,7 @@
 
       <div class="content" id="mapid">
       </div>
+<<<<<<< HEAD
       <script>
         var filterData = [
 
@@ -174,11 +218,79 @@
         }
 
       </script>
+=======
+      <div class="field-body">
+        <div class="field">
+          <div class="control">
+                <button class="button is-link is-rounded is-light">Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+
+    <div class="columns">
+    <div class="column">
+   <div class="content" id="mapid"></div>
+    
+<script>
+
+  const foodInspection = [
+    {"name": "OUTBACK STEAKHOUSE 2145", "longitude": -76.958574, "latitude": 38.966903},
+    {"name": "THE CHILDREN'S GUILD", "longitude": -76.986143, "latitude": 38.959978},
+    {"name": "CADIA HEALTHCARE - HYATTSVILLE", "longitude": -76.977768, "latitude": 38.952607}
+  ]
+
+  var myMap = L.map('mapid').setView([38.9869, -76.9426], 12);
+
+  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
+  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+  maxZoom: 18,
+  id: 'mapbox/streets-v11',
+  tileSize: 512,
+  zoomOffset: -1,
+  accessToken: 'pk.eyJ1Ijoid3RhbTI2IiwiYSI6ImNrOGp0aGJtcjA1cWQzZXMwZnBybTdlY3cifQ.kQdXdFOLYeAM4qAM-kQbdw'
+  }).addTo(myMap);
+
+  var marker = L.marker([38.9860, -76.9451]).addTo(myMap);
+
+  /*var circle = L.circle([38.9955, -76.9412], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 500
+  }).addTo(myMap);*/
+  
+  marker.bindPopup("UMD Mckeldin Library", {
+    'className': 'customPopup'
+  }).openPopup();
+  
+  /*var popup = L.popup()
+  .setLatLng([38.9869, -76.9426])
+  .setContent("I am a standalone popup.")
+  .openOn(myMap);*/
+
+  var popup = L.popup();
+
+  function onMapClick(e) {
+    popup
+      .setLatLng(e.latlng)
+      .setContent("You clicked the map at " + e.latlng.toString())
+      .openOn(myMap);
+  }
+
+  myMap.on('click', onMapClick);
+
+  for (let i = 0; i < foodInspection.length; i++) {
+    L.marker([foodInspection[i].latitude, foodInspection[i].longitude]).addTo(myMap);
+  }
+>>>>>>> parent of 6a5a458... updated search.html and transfered to index.html
 
 
     </div>
   </div>
 </div>
+<<<<<<< HEAD
 </section>
 <script type='text/javascript'>
 
@@ -186,3 +298,9 @@
 
 </body>
 </html>
+=======
+</div>
+</div>
+  </body>
+</html>
+>>>>>>> parent of 6a5a458... updated search.html and transfered to index.html
