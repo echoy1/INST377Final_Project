@@ -11,10 +11,10 @@ app.use(express.static("/public"));
 app.use(express.static(__dirname + '/public/css'));
 
 app.get('/', function (req, res) {
-  res.sendFile('public/search.html', { root: '.' })
+  res.sendFile('public/index.html', { root: '.' })
 });
-app.get('/search.html', function (req, res) {
-  res.sendFile('public/search.html', { root: '.' })
+app.get('/index.html', function (req, res) {
+  res.sendFile('public/index.html', { root: '.' })
 });
 app.get('/about.html', function (req, res) {
   res.sendFile('public/about.html', { root: '.' })
