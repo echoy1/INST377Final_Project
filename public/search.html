@@ -58,129 +58,119 @@
                   <i class="fas fa-exclamation-triangle"></i>
                 </span>
           </div>
-          <!-- <p class="help is-danger">This zipcode is invalid</p> -->
         </div>
 
         <div class="select is-rounded">
           <select name="branch">
-            <option selected>County</option>
-            <option>Branch 1</option>
-            <option>Branch 2</option>
-            <option>Branch 3</option>
-            <option>Branch 4</option>
-            <option>Branch 5</option>
+            <option selected disabled>Select a Branch Type</option>
+            <option>All</option>
+            <option>Other</option>
+            <option>County</option>
+            <option>University</option>
+            <option>Federal</option>
           </select>
         </div>
       </form>
 
       <div class="field is-grouped">
         <div class="control">
-          <button id="searchButton" class="button is-link is-rounded">Search</button>
+          <button class="button is-link is-rounded" id="searchButton">Search</button>
         </div>
       </div>
 
-
       <div class="content" id="mapid">
       </div>
-      <script>
-        var filterData = [
-
-        ]
-
-        var myMap = L.map('mapid').setView([38.9869, -76.9426], 12);
-
-        L.tileLayer(
-            'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
-            {
-              attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-              maxZoom: 18,
-              id: 'mapbox/streets-v11',
-              tileSize: 512,
-              zoomOffset: -1,
-              accessToken: 'pk.eyJ1Ijoid3RhbTI2IiwiYSI6ImNrOGp0aGJtcjA1cWQzZXMwZnBybTdlY3cifQ.kQdXdFOLYeAM4qAM-kQbdw'
-            }).addTo(myMap);
-
-        //TODO loop and add marker
-        var marker = L.marker([38.9860, -76.9451]).addTo(myMap);
-
-        //TODO loop and add marker
-        marker.bindPopup("UMD Mckeldin Library", {
-          'className': 'customPopup'
-        }).openPopup();
-
-        var popup = L.popup();
-
-        function onMapClick(e) {
-          popup
-          .setLatLng(e.latlng)
-          .setContent("You clicked the map at " + e.toString())
-          .openOn(myMap);
-        }
-
-        myMap.on('click', onMapClick);
-        for (let i = 0; i < filterData.length; i++) {
-          L.marker([filterData[i].latitude, filterData[i].longitude]).addTo(myMap);
-        }
-
-
-        const searchBtn = document.querySelector('#searchButton');
-
-        searchBtn.addEventListener("click", sendForm);
-
-        async function sendForm(e) {
-          e.preventDefault(); // this prevents your page reloading on button click
-          const target = document.querySelector("#labForm");
-
-
-          const response = await fetch("/api", {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-
-          const data = await response.json();
-
-          data.map((m) => ({
-            name: m.branch_name,
-            lat: m.location_1.latitude,
-            long: m.location_1.longitude,
-            zipCode: m.zip_code,
-            branch: m.branch_type,
-          }))
-
-          const formdata = new FormData(target);
-          const name =  formdata.get("name")
-          const zip =  formdata.get("zip")
-          const branch =  formdata.get("branch")
-          filterData = data;
-
-          if(name !== null && name !== '') {
-            filterData = filterData.filter(d => d.branch_name.toUpperCase()==name.toUpperCase())
-          }
-          if(zip !== null && zip !== '') {
-            filterData = filterData.filter(d => d.zip_code.toUpperCase()==zip.toUpperCase())
-          }
-          if(branch !== null && branch !== '') {
-            filterData = filterData.filter(d => d.branch_type.toUpperCase()==branch.toUpperCase())
-          }
-          console.log(filterData)
-          for (let i = 0; i < filterData.length; i++) {
-            L.marker([filterData[i].location_1.latitude, filterData[i].location_1.longitude, filterData[i].branch_name]).addTo(myMap);
-            console.log(myMap)
-
-          }
-          return filterData
-        }
-
-      </script>
-
-
     </div>
   </div>
 </div>
 </section>
-<script type='text/javascript'>
+
+
+<script>
+  var filteredData = []
+  var data
+  var myMap = L.map('mapid').setView([38.9869, -76.9426], 12);
+  var tileLayer =  L.tileLayer(
+      'https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}',
+      {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox/streets-v11',
+        tileSize: 512,
+        zoomOffset: -1,
+        accessToken: 'pk.eyJ1Ijoid3RhbTI2IiwiYSI6ImNrOGp0aGJtcjA1cWQzZXMwZnBybTdlY3cifQ.kQdXdFOLYeAM4qAM-kQbdw'
+      })
+  addTileLayer()
+
+
+  const searchBtn = document.querySelector('#searchButton');
+  searchBtn.addEventListener("click", sendForm);
+
+  async function sendForm(e) {
+    e.preventDefault();
+    const target = document.querySelector("#labForm");
+    if (data == undefined) {
+      await getData()
+    }
+    filterData(target)
+    var group = L.layerGroup()
+    resetLayersGroup()
+    myMap.addLayer(group)
+    for (let i = 0; i < filteredData.length; i++) {
+      group.addLayer(L.marker(
+          [filteredData[i].location_1.latitude, filteredData[i].location_1.longitude, i]).bindPopup(
+          filteredData[i].branch_name))
+    }
+  }
+
+  function filterData(target){
+    const formdata = new FormData(target);
+    const name = formdata.get("name")
+    const zip = formdata.get("zip")
+    const branch = formdata.get("branch")
+    filteredData = data;
+
+    if (name !== null && name !== '') {
+      filteredData = filteredData.filter(d => d.branch_name.toUpperCase().includes(name.toUpperCase()))
+    }
+    if (zip !== null && zip !== '') {
+      filteredData = filteredData.filter(d => d.zip_code.toUpperCase() == zip.toUpperCase())
+    }
+    console.log(filteredData)
+    if (branch != "All" && branch !== null && branch !== '') {
+      filteredData = filteredData.filter(d => d.branch_type.toUpperCase() == branch.toUpperCase())
+    }
+  }
+  async function getData() {
+    const response = await fetch("/api", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+
+    console.log("Get Library data")
+    data = await response.json();
+
+    data.map((m) => ({
+      name: m.branch_name,
+      lat: m.location_1.latitude,
+      long: m.location_1.longitude,
+      zipCode: m.zip_code,
+      branch: m.branch_type,
+    }))
+  }
+
+  function resetLayersGroup() {
+    myMap.eachLayer(function (layer) {
+      myMap.removeLayer(layer)
+    })
+    addTileLayer()
+  }
+
+  function addTileLayer() {
+    tileLayer.addTo(myMap)
+  }
 
 </script>
 
