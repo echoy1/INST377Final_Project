@@ -6,7 +6,6 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon --exec babel-node server.js"
-    
   },
   "author": "Alex Leitch",
   "license": "CC-BY-SA-4.0",
@@ -29,6 +28,5 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-html": "^6.0.0",
     "eslint-plugin-import": "^2.18.2"
-    
   }
 }
