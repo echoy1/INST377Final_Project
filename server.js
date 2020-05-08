@@ -7,9 +7,12 @@ const port = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+//Loads files from public folder 
 app.use(express.static("/public"));
 app.use(express.static(__dirname + '/public/css'));
 
+//Expose html
 app.get('/', function (req, res) {
   res.sendFile('public/index.html', { root: '.' })
 });
@@ -23,21 +26,17 @@ app.get('/contact.html', function (req, res) {
   res.sendFile('public/contact.html', { root: '.' })
 });
 
-
+//Retreving data from Prince Georges Website asynchronously
 async function processDataForFrontEnd(req, res) {
-  const baseURL = "https://data.princegeorgescountymd.gov/resource/7k64-tdwr.json"; // Enter the URL for the data you would like to retrieve here
+  const baseURL = "https://data.princegeorgescountymd.gov/resource/7k64-tdwr.json"; 
 
-  // Your Fetch API call starts here
-  // Note that at no point do you "return" anything from this function -
-  // it instead handles returning data to your front end at line 34.
+  
   const response = await fetch(baseURL);
   const data = await response.json();
   return data
 }
 
-// Syntax change - we don't want to repeat ourselves,
-// or we'll end up with spelling errors in our endpoints.
-//
+//Expose get request
 app
   .route("/api")
 .get((req, res) => {
@@ -48,6 +47,7 @@ app
 }
 )
 
+//Ouputs which port we are running
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
 });
