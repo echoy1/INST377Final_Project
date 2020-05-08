@@ -45,8 +45,23 @@ app
     const result = await processDataForFrontEnd(req, res)
     res.send(result)
   })()
-}
-)
+})
+.post((req, res) => {
+  console.log("/api post request", req.body);
+  if (!req.body.name) {
+    console.log(req.body);
+    res.status("418").send("something went wrong, additionally i am a teapot");
+  } else {
+    writeUser(req.body.name, dbSettings)
+    .then((result) => {
+      console.log(result);
+      res.send("your request was successful"); // simple mode
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
