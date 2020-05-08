@@ -28,8 +28,6 @@ async function processDataForFrontEnd(req, res) {
   const baseURL = "https://data.princegeorgescountymd.gov/resource/7k64-tdwr.json"; // Enter the URL for the data you would like to retrieve here
 
   // Your Fetch API call starts here
-  // Note that at no point do you "return" anything from this function -
-  // it instead handles returning data to your front end at line 34.
   const response = await fetch(baseURL);
   const data = await response.json();
   return data
@@ -46,16 +44,17 @@ app
     res.send(result)
   })()
 })
+
 .post((req, res) => {
   console.log("/api post request", req.body);
   if (!req.body.name) {
     console.log(req.body);
     res.status("418").send("something went wrong, additionally i am a teapot");
   } else {
-    writeUser(req.body.name, dbSettings)
+    writeUser(req.body.name, processDataForFrontEnd(req, res))
     .then((result) => {
       console.log(result);
-      res.send("your request was successful"); // simple mode
+      res.send("Data sucessfully retrieved"); 
     })
     .catch((err) => {
       console.log(err);
