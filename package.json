@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node -r esm server.js"
+    "start": "nodemon --exec babel-node server.js"
   },
   "author": "Alex Leitch",
   "license": "CC-BY-SA-4.0",
