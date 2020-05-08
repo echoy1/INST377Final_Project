@@ -30,7 +30,11 @@ app.get('/contact.html', function (req, res) {
 async function processDataForFrontEnd(req, res) {
   const baseURL = "https://data.princegeorgescountymd.gov/resource/7k64-tdwr.json"; 
 
+<<<<<<< HEAD
   
+=======
+  // Your Fetch API call starts here
+>>>>>>> 5a044043dd1beba58cc451daeefd3641dc6e2354
   const response = await fetch(baseURL);
   const data = await response.json();
   return data
@@ -44,8 +48,24 @@ app
     const result = await processDataForFrontEnd(req, res)
     res.send(result)
   })()
-}
-)
+})
+
+.post((req, res) => {
+  console.log("/api post request", req.body);
+  if (!req.body.name) {
+    console.log(req.body);
+    res.status("418").send("something went wrong, additionally i am a teapot");
+  } else {
+    writeUser(req.body.name, processDataForFrontEnd(req, res))
+    .then((result) => {
+      console.log(result);
+      res.send("Data sucessfully retrieved"); 
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+  }
+});
 
 //Ouputs which port we are running
 app.listen(port, () => {
