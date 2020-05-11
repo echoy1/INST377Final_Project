@@ -13,7 +13,6 @@ async function writeUser(username, dbSettings) {
     return result;
   }
   
-export default writeUser;
 //   import writeUser from "./libraries/writeuser";
 
 // 
@@ -26,6 +25,6 @@ async function editUser(username, dbSettings) {
   return result;
 }
 
-export default writeUser;
+export {writeUser, editUser};
 
 

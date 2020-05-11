@@ -7,7 +7,7 @@ import fetch from "node-fetch";
 
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
-import writeUser from "./libraries/writeuser";
+import {writeUser, editUser} from "./libraries/writeuser";
 
 const dbSettings = {
   filename: "./tmp/database.db",
