@@ -2,6 +2,18 @@
 
 import express from "express";
 import fetch from "node-fetch";
+
+//Import necessary functions for server-side version of SQL-lite.
+
+import sqlite3 from "sqlite3";
+import { open } from "sqlite";
+import {writeUser, editUser} from "./libraries/writeuser";
+
+const dbSettings = {
+  filename: "./tmp/database.db",
+  driver: sqlite3.Database,
+};
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -30,37 +42,46 @@ app.get('/contact.html', function (req, res) {
 async function processDataForFrontEnd(req, res) {
   const baseURL = "https://data.princegeorgescountymd.gov/resource/7k64-tdwr.json"; 
 
-  
+  // Your Fetch API call starts here
   const response = await fetch(baseURL);
   const data = await response.json();
-  return data
+  return data;
 }
 
-//Expose get request
+
+// Syntax change - we don't want to repeat ourselves,
+// or we'll end up with spelling errors in our endpoints.
+//
 app
   .route("/api")
 .get((req, res) => {
   (async () => {
-    const result = await processDataForFrontEnd(req, res)
-    res.send(result)
+    const result = await processDataForFrontEnd(req, res);
+    console.log("Expected result", result);
+    res.send(result);
   })()
 })
-
 .post((req, res) => {
   console.log("/api post request", req.body);
   if (!req.body.name) {
     console.log(req.body);
     res.status("418").send("something went wrong, additionally i am a teapot");
   } else {
-    writeUser(req.body.name, processDataForFrontEnd(req, res))
+    writeUser(req.body.name, dbSettings)
     .then((result) => {
       console.log(result);
       res.send("Data sucessfully retrieved"); 
     })
     .catch((err) => {
       console.log(err);
-    });
+    })
   }
+})
+.put((req, res) => {
+    console.log("/api put request", req.body);
+    editUser(req.body.name, dbSettings);
+    res.send('Form saved');
+  
 });
 
 //Ouputs which port we are running
