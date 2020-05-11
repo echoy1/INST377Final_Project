@@ -7,10 +7,10 @@ import fetch from "node-fetch";
 
 import sqlite3 from "sqlite3";
 import { open } from "sqlite";
-import {writeUser, editUser} from "./libraries/writeuser";
+import {writeUser, editUser} from "./server_files/writeuser";
 
 const dbSettings = {
-  filename: "./tmp/database.db",
+  filename: "./server_files/tmp/database.db",
   driver: sqlite3.Database,
 };
 
