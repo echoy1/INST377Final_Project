@@ -19,9 +19,12 @@ const port = process.env.PORT || 3000;
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+//Loads files from public folder 
 app.use(express.static("/public"));
 app.use(express.static(__dirname + '/public/css'));
 
+//Expose html
 app.get('/', function (req, res) {
   res.sendFile('public/index.html', { root: '.' })
 });
@@ -35,9 +38,9 @@ app.get('/contact.html', function (req, res) {
   res.sendFile('public/contact.html', { root: '.' })
 });
 
-
+//Retreving data from Prince Georges Website asynchronously
 async function processDataForFrontEnd(req, res) {
-  const baseURL = "https://data.princegeorgescountymd.gov/resource/7k64-tdwr.json"; // Enter the URL for the data you would like to retrieve here
+  const baseURL = "https://data.princegeorgescountymd.gov/resource/7k64-tdwr.json"; 
 
   // Your Fetch API call starts here
   const response = await fetch(baseURL);
@@ -81,6 +84,7 @@ app
   
 });
 
+//Ouputs which port we are running
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
 });
