@@ -14,7 +14,18 @@ async function writeUser(username, dbSettings) {
   }
   
 export default writeUser;
-
 //   import writeUser from "./libraries/writeuser";
 
 // 
+
+async function editUser(username, dbSettings) {
+  console.log(`touched username ${username}`);
+  const db = await open(dbSettings)
+  await db.exec(`INSERT INTO user VALUES ("${username}")`);
+  console.log('Expected result', result);
+  return result;
+}
+
+export default writeUser;
+
+
