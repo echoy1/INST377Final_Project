@@ -31,5 +31,14 @@ The goal of this project is create a viable search application that will allow r
 * How to run your application on a server
 * How to run any tests you have written for your software
 * The API for your server application - all GET, POST, PUT, etc endpoints, and what they each do
+
+The server containts three endpoints. A GET endpoint that retrieves the data from Prince George's County JSON dataset and 
+
 * A clear set of expectations around known bugs and a road-map for future development.
+
+Some known bugs include: 
+* Page must be refreshed in order to clear the map and any search entries previously entered
+* 
+
+For future development, considering fleshing out the Contact page and archiving submissions to either a local database or online database. Other thoughts to consider would be creating an email address for the website specifically and linking that to the Contact submissions page so that any and all submissions get sent to the website email. 
 
