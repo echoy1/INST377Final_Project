@@ -2,14 +2,14 @@
 ### Purpose of this Project
 The goal of this project is create a viable search application that will allow residents of Prince George's County find libraries near them. We hope this application will encourage and faciliate higher attendance at Prince Geroge's County local libraries. 
 
-[URL where our application is currently hosted on Heroku](https://inst377-morning-11.herokuapp.com/)
+[Link to where our application is currently hosted on Heroku](https://inst377-morning-11.herokuapp.com/)
 
 
 ### Target Browsers
 * Google Chrome
 * Mozilla Firefox
 * Ideal iOS: 12.4 or later
-* Ideal Andriod: 
+* Ideal Andriod: 7.0 or later
 
 
 [Link to User Manual](./docs/user.md)
@@ -44,8 +44,8 @@ CSS framework built with Sass and based on Flexbox that helps styling the websit
  npm install bulma
  ```
 
-### Node.js
-Server based operation that allows application to be run locally.
+### All other dependencies
+General instructions that should install all the necessary dependencies needed to run application. 
 
 #### Through terminal: 
  1. Navigate to your project directory. 
@@ -68,7 +68,9 @@ Server based operation that allows application to be run locally.
 
 The server containts three endpoints.
 
- * A GET endpoint that retrieves the data from Prince George's County JSON dataset and 
+ * A GET endpoint that retrieves the data from Prince George's County JSON dataset and sends it to the frontend as as text.
+ * A POST endpoint that adds libraries to the local database (currently set up and maintained with SQLite) based on body text entered as a request. 
+ * A PUT endpoint that edits library entries in the local database based on what is entered from the request. 
 
  ## Known Bugs
 
@@ -77,5 +79,5 @@ The server containts three endpoints.
 
 ## Future development 
 
-For future development, considering fleshing out the Contact page and archiving submissions to either a local database or online database. Other thoughts to consider would be creating an email address for the website specifically and linking that to the Contact submissions page so that any and all submissions get sent to the website email. 
+For future development, consider fleshing out the Contact page and archiving submissions to either a local database or online database. Other thoughts to consider would be creating an email address for the website specifically and linking that to the Contact submissions page so that any and all submissions get sent to the website email. 
 
