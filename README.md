@@ -31,9 +31,11 @@ The goal of this project is create a viable search application that will allow r
 
 Dependencies:
 * Bulma
+
 Through ZIP file:
  Go to bulma.io and download the bulma files.
  Move and unzip the files to your project folders.
+ 
  Through terminal:
  Change to your project directory.
  Type in "npm install bulma"
