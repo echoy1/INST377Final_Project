@@ -28,6 +28,16 @@ The goal of this project is create a viable search application that will allow r
 # Developer Manual
 
 * How to install your application and all dependencies
+
+Dependencies:
+* Bulma
+Through ZIP file:
+ Go to bulma.io and download the bulma files.
+ Move and unzip the files to your project folders.
+ Through terminal:
+ Change to your project directory.
+ Type in "npm install bulma"
+
 * How to run your application on a server
 * How to run any tests you have written for your software
 * The API for your server application - all GET, POST, PUT, etc endpoints, and what they each do
