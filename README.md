@@ -75,7 +75,7 @@ The server containts three endpoints.
  ## Known Bugs
 
 * Page must be refreshed in order to clear the map and any search entries previously entered
-* 
+
 
 ## Future development 
 
