@@ -31,6 +31,7 @@ The goal of this project is create a viable search application that will allow r
 
 ## Dependencies:
 ### Bulma
+
     CSS framework built with Sass and based on Flexbox that helps styling the website easier.
 #### Through ZIP file:
  1. Go to [bulma.io](https://bulma.io/) and download the bulma files. 
